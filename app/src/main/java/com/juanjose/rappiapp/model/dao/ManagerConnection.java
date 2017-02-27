@@ -2,6 +2,7 @@ package com.juanjose.rappiapp.model.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -93,6 +94,13 @@ public class ManagerConnection {
                 = (ConnectivityManager)  context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void consultElements(){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context.getApplicationContext(), "administrator", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+
+        Cursor fila = db.rawQuery("select category from elements where category = Social Networking", null);
     }
 
 
